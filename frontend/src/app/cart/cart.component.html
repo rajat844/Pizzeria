@@ -1,0 +1,259 @@
+<div class="container mt-5 mb-5">
+  <div class="d-flex justify-content-center row">
+    <div class="col-md-8">
+      <div class="p-2">
+        <h2>Shopping cart</h2>
+      </div>
+      <div *ngIf="user == false">
+        <h5>Login/Signup to Access Cart</h5>
+        <div
+          class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded"
+        >
+          <a
+            class="btn btn-warning btn-block btn-lg ml-2 pay-button"
+            routerLink="/login"
+          >
+            Login
+          </a>
+        </div>
+        <div
+          class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded"
+        >
+          <a
+            class="btn btn-primary btn-block btn-lg ml-2 pay-button"
+            routerLink="/signup"
+          >
+            signup
+          </a>
+        </div>
+      </div>
+      <div *ngIf="user != false">
+        <h5>Welcome {{ username | username }}</h5>
+        <div *ngIf="iscartempty()">
+          <h6>Cart is empty</h6>
+        </div>
+        <div *ngIf="iscartempty() == false">
+          <div *ngFor="let data of content">
+            <div
+              class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded"
+            >
+              <div class="mr-1">
+                <img class="rounded" src="{{ data.image }}" width="70" />
+              </div>
+              <div
+                class="d-flex flex-column align-items-center product-details"
+              >
+                <span class="font-weight-bold">{{ data.name }}</span>
+              </div>
+              <div class="d-flex flex-column align-items-center product-details">
+                <span>{{data.igNames}}</span>
+              </div>
+              <div class="d-flex flex-row align-items-center qty">
+                <button
+                  class="btn btn-light rounded"
+                  type="button"
+                  (click)="decrement(data.pizzaid)"
+                >
+                  -
+                </button>
+                <h5 class="text-grey mt-1 mr-1 ml-1">{{ data.qty }}</h5>
+                <button
+                  class="btn btn-light rounded"
+                  type="button"
+                  (click)="increment(data.pizzaid)"
+                >
+                  +
+                </button>
+              </div>
+              <div>
+                <h5 class="text-grey">{{ data.price | currency }}</h5>
+              </div>
+              <div class="d-flex align-items-center">
+                <button
+                  type="button"
+                  class="btn btn-light rounded"
+                  (click)="delete(data.pizzaid)"
+                >
+                  remove
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded"
+          >
+            <button
+              class="btn btn-warning btn-block btn-lg ml-2 pay-button"
+              type="button"
+            >
+              Proceed to Pay
+            </button>
+          </div>
+
+          <!-- <div *ngIf="user == false">
+  <br />
+  <div
+    class="container justify-content-center align-items-center border border-danger bg-info text-dar p-1 rounded"
+  >
+    <div class="text-center container justify-content-center">
+      <h1>Your Pizzeria Cart is empty</h1>
+    </div>
+    <br /><br />
+
+    <br />
+    <div class="container justify-content-center align-items-center">
+      <div
+        class="text-center container justify-content-center"
+        style="display: inline; margin-left: 450px"
+      >
+        <button type="button" class="btn btn-warning">
+          <a
+            routerLink="/login"
+            class="text-center text-decoration-none text-dark"
+            style="color: dodgerblue"
+          >
+            Login</a
+          >
+        </button>
+      </div>
+      <div
+        class="text-center container justify-content-center"
+        style="display: inline"
+      >
+        <button type="button" class="btn btn-warning">
+          <a
+            routerLink="/signup"
+            class="text-center text-decoration-none text-dark"
+            style="color: dodgerblue"
+          >
+            Sign Up</a
+          >
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="user != false" class="m-2">
+  <div
+    class="container justify-content-center align-items-center border border-danger bg-info text-dar p-1 rounded"
+  >
+    <div class="text-center container justify-content-center">
+      <h6>{{ username | username }}</h6>
+    </div>
+  </div>
+  <div *ngIf="iscartempty()" class="m-2">
+    <br />
+    <div
+      class="container justify-content-center align-items-center border border-danger bg-info text-dar p-1 rounded"
+    >
+      <div class="text-center container justify-content-center">
+        <h1>Your Pizzeria Cart is empty</h1>
+      </div>
+      <br /><br />
+
+      <br />
+      <div class="container justify-content-center align-items-center">
+        <div
+          class="text-center container justify-content-center"
+          style="display: inline; margin-left: 450px"
+        >
+          <button type="button" class="btn btn-warning">
+            <a
+              routerLink="/pizza"
+              class="text-center text-decoration-none text-dark"
+              style="color: dodgerblue"
+            >
+              Add Pizza!!
+            </a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <div *ngFor="let data of content">
+    <table
+      class="table table-striped table-hover table-active d-flex justify-content-center"
+      style="width: 1200px"
+    >
+      <tbody>
+        <tr>
+          <td scope="row" class="border border-secondary" style="width: 180px">
+            <img
+              [src]="data.image"
+              class="img-fluid r"
+              alt="Responsive image"
+              style="width: 100px; height: 45px"
+            />
+          </td>
+          <td
+            style="width: 130px; height: 62px"
+            class="float-center border border-secondary"
+          >
+            {{ data.name }}
+          </td>
+          <td
+            style="width: 100px; height: 62px"
+            class="float-center border border-secondary"
+          >
+            {{ data.price | currency }}
+          </td>
+          <td
+            style="width: 130px; height: 62px"
+            class="float-center border border-secondary"
+          >
+            <button
+              type="button"
+              class="btn btn-light rounded"
+              (click)="decrement(data.pizzaid)"
+            >
+              <b>-</b>
+            </button>
+            {{ data.qty }}
+            <button
+              type="button"
+              class="btn btn-light rounded"
+              (click)="increment(data.pizzaid)"
+            >
+              <b>+</b>
+            </button>
+          </td>
+          <td
+            style="width: 100px; height: 45px"
+            class="border border-secondary"
+          >
+            <div class="form-check float-center">
+              <button
+                type="button"
+                class="btn btn-light rounded"
+                (click)="delete(data.pizzaid)"
+              >
+                Remove
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="iscartempty() != true">
+    <h6 style="color: purple; margin-left: 360px">
+      Total Amount: {{ totalamout() | currency }}
+    </h6>
+  </div>
+  <input
+    class="btn btn-dark text-warning text-center"
+    *ngIf="iscartempty() != true"
+    type="submit"
+    value="Check Out"
+    (click)="checkout()"
+    style="margin-left: 530px"
+  /> 
+</div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

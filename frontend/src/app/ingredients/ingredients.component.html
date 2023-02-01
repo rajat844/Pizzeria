@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-12 text-center">
+      <p class="text-sm-left">
+        Pizzeria now gives you option to build your own pizza. Customize your
+        pizza by choosing ingredients from the list given below.
+      </p>
+    </div>
+    <div>
+      <form>
+        <div *ngFor="let data of content">
+          <table
+            class="table table-striped table-hover table-active d-flex justify-content-center"
+            style="width: 1200px"
+          >
+            <tbody>
+              <tr>
+                <td
+                  scope="row"
+                  class="border border-secondary"
+                  style="width: 180px"
+                >
+                  <img
+                    [src]="data.image"
+                    class="img-fluid r"
+                    alt="Responsive image"
+                    style="width: 100px; height: 45px"
+                  />
+                </td>
+                <td
+                  style="width: 130px; height: 62px"
+                  class="float-center border border-secondary"
+                >
+                  {{ data.tname }}
+                </td>
+
+                <td
+                  style="width: 100px; height: 62px"
+                  class="float-center border border-secondary"
+                >
+                  {{ data.price | currency }}
+                </td>
+
+                <td class="buildcheck" style="width: 20%">
+                  <p>
+                    <input
+                      class="input"
+                      type="checkbox"
+                      [value]="data.id"
+                      (change)="totalSum($event, data.price, data.tname)"
+                      name="add"
+                    /><span>Add</span>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <h2 class="mb-5">Total Cost: {{ total }}</h2>
+        </div>
+        <div class="text-center">
+          <button (click)="cart()" type="button" class="btn btn-primary">
+            Add To Cart
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<br /><br /><br /><br /><br />
+
+<!-- <div class="content">
+  <div class="container">
+    <h2 class="mb-5">Pizzeria Gives You option to Customize Your Pizza</h2>
+    <div class="table-responsive">
+      <table class="table custom-table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Ingredient Name</th>
+            <th scope="col">Addon Price</th>
+            <th scope="col">What it looks like</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let ig of content">
+          <tr>
+            <th scope="row">
+              <label class="control control--checkbox">
+                <input type="checkbox" (change)="totalSum($event, ig.price,ig.tname)" />
+                <div class="control__indicator"></div>
+              </label>
+            </th>
+            <td>{{ ig.tname }}</td>
+            <td>{{ ig.price }}</td>
+            <td class="persons">
+              <img class="img-size" src="{{ ig.image }}" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <h2 class="mb-5">Total Cost: {{ total }}</h2>
+  </div>
+  <div class="text-center">
+    <button (click)="cart()" type="button" class="btn btn-primary">
+      Add To Cart
+    </button>
+  </div>
+</div> -->

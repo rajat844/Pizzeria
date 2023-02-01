@@ -1,0 +1,54 @@
+<div>
+  <div *ngFor="let data of content" class="inline-block container">
+    <div
+      style="
+        width: 550px;
+        height: 290px;
+        margin: 1px;
+        display: inline-block;
+        border: 2px solid black;
+      "
+      class="column"
+    >
+      <div
+        class="inline-block text-center"
+        style="width: 90px; margin: 1px; display: inline-block"
+      >
+        <b>{{ data.name }}</b
+        ><br />
+        <div [ngClass]="data.type" class="box" style="margin-left: 33px"></div>
+        <br /><br />
+        <p class="text-center">
+          <b>{{ data.price | currency }}</b>
+        </p>
+      </div>
+      <div
+        class="inline-block"
+        style="width: 300px; margin: 1px; display: inline-block"
+      >
+        <p>{{ data.description }}</p>
+        <p><b>Ingredients: </b>{{ data.ingredients }}</p>
+        <p><b>Toppings: </b>{{ data.topping }}</p>
+      </div>
+      <div
+        class="inline-block float-end"
+        style="width: 120px; margin: 1px; display: inline-block"
+      >
+        <div style="height: 90px" class="m-2">
+          <img src="{{ data.image }}" class="figure-img img-fluid" alt="..." />
+        </div>
+        <button
+          type="button"
+          class="btn btn-warning text-white"
+          (click)="
+            setPizza(data.id, data.price, data.type, data.name, data.image)
+          "
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</div>

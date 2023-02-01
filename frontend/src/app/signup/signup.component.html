@@ -1,0 +1,153 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+      <div class="card border-0 shadow rounded-3 my-5">
+        <div class="card-body p-4 p-sm-5">
+          <h5 class="card-title text-center mb-5 fw-light fs-5">Sign Up</h5>
+          <form
+            method="post"
+            #LoginForm="ngForm"
+            (ngSubmit)="sendValues(LoginForm.value)"
+          >
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                #uname="ngModel"
+                ngModel
+                name="uname"
+                aria-describedby="emailHelp"
+                placeholder="User Name"
+                required
+                pattern="^[A-Za-z][A-Za-z0-9_]{7,29}$"
+              /><label for="floatingInput">User Name</label>
+              <div
+                *ngIf="(uname.invalid && uname.touched) || uname.dirty"
+                style="color: red"
+              >
+                <small *ngIf="uname.errors?.['required']" class="text-danger"
+                  >User Name is required</small
+                >
+
+                <small *ngIf="uname.errors?.['pattern']" class="text-danger"
+                  >A valid username should start with an alphabet [A-Z] or
+                  [a-z]. All other characters can be alphabets, numbers or an
+                  underscore [A-Z][a-z][0-9]. Total Length Should be between
+                  [8,29].</small
+                >
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="email"
+                class="form-control"
+                #uemail="ngModel"
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                name="uemail"
+                ngModel
+                aria-describedby="emailHelp"
+                placeholder="Email address"
+                required
+              />
+              <label for="floatingInput">Email address</label>
+              <div
+                *ngIf="(uemail.invalid && uemail.touched) || uemail.dirty"
+                style="color: red"
+              >
+                <small *ngIf="uemail.errors?.['required']" class="text-danger"
+                  >Primary email is required</small
+                >
+
+                <small *ngIf="uemail.errors?.['pattern']" class="text-danger"
+                  >Please provide a valid email address</small
+                >
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                #ufname="ngModel"
+                ngModel
+                name="ufname"
+                aria-describedby="emailHelp"
+                placeholder="Full Name"
+                required
+              />
+              <label for="floatingInput">Full Name</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="password"
+                class="form-control"
+                #upassword="ngModel"
+                ngModel
+                name="upassword"
+                placeholder="Password"
+                required
+                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&]).{8,}"
+              />
+              <label for="floatingInput">Password</label>
+              <div
+                *ngIf="
+                  (upassword.invalid && upassword.touched) || upassword.dirty
+                "
+                style="color: red"
+              >
+                <small
+                  *ngIf="upassword.errors?.['required']"
+                  class="text-danger"
+                  >Password required</small
+                >
+
+                <small *ngIf="upassword.errors?.['pattern']" class="text-danger"
+                  >Password Should Have at least One Special Character ,One
+                  UpperCase, One Lower Case One Numeric Digit Minimum 8
+                  character</small
+                >
+              </div>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                #upnum="ngModel"
+                ngModel
+                required
+                pattern="^[0-9]{10}$"
+                maxlength="10"
+                name="upnum"
+                aria-describedby="emailHelp"
+                placeholder="Phone Number"
+                required
+              />
+              <label for="floatingInput">Phone Number</label>
+              <div
+                *ngIf="(upnum.invalid && upnum.touched) || upnum.dirty"
+                style="color: red"
+              >
+                <small *ngIf="upnum.errors?.['required']" class="text-danger"
+                  >Phone Number Should be of length 10</small
+                >
+
+                <small *ngIf="upnum.errors?.['pattern']" class="text-danger"
+                  >Phone Number Should be of Digits from 0-9</small
+                >
+              </div>
+            </div>
+            <div class="d-grid">
+              <button
+                class="btn btn-primary btn-login text-uppercase fw-bold"
+                type="submit"
+              >
+                Sign Up
+              </button>
+            </div>
+            <hr class="my-4" />
+            <p>Existing user? <a routerLink="/login">login</a> here</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
